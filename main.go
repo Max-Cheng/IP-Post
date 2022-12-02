@@ -17,8 +17,8 @@ func main() {
 	r.Get("/", func(c *fiber.Ctx) error {
 		RWL.Lock()
 		hostSlice := make([]string, 0)
-		for i,v := range hostMap {
-			if time.Since(v)>=time.Hour {
+		for i, v := range hostMap {
+			if time.Since(v) >= time.Hour {
 				delete(hostMap, i)
 				continue
 			}
@@ -33,6 +33,5 @@ func main() {
 		RWL.Unlock()
 		return nil
 	})
-
 	log.Fatal(r.Listen(":" + PORT))
 }
